@@ -5,13 +5,11 @@ from player import Player
 
 def main():
 
-    #groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)
 
-    #inits
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
@@ -34,8 +32,8 @@ def main():
 
         #rendering
         screen.fill("black")
-        
-        drawable.draw(screen)
+        for sprite in drawable:
+            sprite.draw(screen)
 
         #always last called
         pygame.display.flip()
