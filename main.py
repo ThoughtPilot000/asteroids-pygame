@@ -23,6 +23,9 @@ def main():
             if event.type == pygame.QUIT:
                 return 
 
+        player.update(dt)
+
+        #rendering
         screen.fill("black")
         player.draw(screen)
 
