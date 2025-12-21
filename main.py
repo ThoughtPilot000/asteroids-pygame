@@ -1,6 +1,7 @@
 import pygame
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 from logger import log_state
+from player import Player
 
 def main():
 
@@ -9,6 +10,8 @@ def main():
 
     deltaclock = pygame.time.Clock()
     dt = 0
+
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}\nScreen height: {SCREEN_HEIGHT}")
@@ -21,6 +24,7 @@ def main():
                 return 
 
         screen.fill("black")
+        player.draw(screen)
 
         #always last called
         pygame.display.flip()
