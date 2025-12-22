@@ -6,8 +6,9 @@ from logger import log_event
 from constants import LINE_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, ASTEROID_MIN_RADIUS
 
 class Asteroids(CircleShape):
-    def __init__(self, x, y, radius):
+    def __init__(self, x, y, radius, golden):
         super().__init__(x,y,radius)
+        self.golden = golden
 
     def split(self):
         self.kill()
@@ -20,14 +21,21 @@ class Asteroids(CircleShape):
             second_vector = self.velocity.rotate(-rand_angle)
             new_radius = self.radius - ASTEROID_MIN_RADIUS
 
-            new_1 = Asteroids(self.position[0], self.position[1], new_radius)
-            new_2 = Asteroids(self.position[0], self.position[1], new_radius)
+            if self.golden:
+                new_1 = Asteroids(self.position[0], self.position[1], new_radius,True)
+                new_2 = Asteroids(self.position[0], self.position[1], new_radius,True)
+            else:
+                new_1 = Asteroids(self.position[0], self.position[1], new_radius,False)
+                new_2 = Asteroids(self.position[0], self.position[1], new_radius,False)
 
             new_1.velocity = first_vector * 1.2
             new_2.velocity = second_vector * 1.2
     
     def draw(self, surface):
-        pygame.draw.circle(surface, "white", self.position, self.radius, LINE_WIDTH)
+        if not self.golden:
+            pygame.draw.circle(surface, "white", self.position, self.radius, LINE_WIDTH)
+        else:
+            pygame.draw.circle(surface, "yellow", self.position, self.radius, LINE_WIDTH)
 
     def update(self, dt):
         self.position += self.velocity * dt

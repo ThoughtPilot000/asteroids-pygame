@@ -9,6 +9,8 @@ from shot import Shot
 
 def main():
     
+    score = 0
+
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}\nScreen height: {SCREEN_HEIGHT}")
 
@@ -48,6 +50,7 @@ def main():
             if i.collide_with(player):
                 log_event("player_hit")
                 print("Game over!")
+                print(f"Your score was {score}!")
                 sys.exit()
 
         for asteroid_object in asteroids:
@@ -56,6 +59,11 @@ def main():
                     log_event("asteroid_shot")
                     x.kill()
                     asteroid_object.split()
+
+                    if asteroid_object.golden:
+                        score += asteroid_object.radius * 3
+                    else:
+                        score += asteroid_object.radius
 
         #rendering
         screen.fill("black")
