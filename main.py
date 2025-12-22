@@ -49,6 +49,7 @@ def main():
         for i in asteroids:
             if i.collide_with(player):
                 log_event("player_hit")
+
                 print("Game over!")
                 print(f"Your score was {score}!")
                 sys.exit()
@@ -64,7 +65,7 @@ def main():
                         score += asteroid_object.radius * 3
                     else:
                         score += asteroid_object.radius
-
+        
         #rendering
         screen.fill("black")
         for sprite in drawable:

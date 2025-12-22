@@ -5,7 +5,7 @@ from shot import Shot
 from constants import PLAYER_RADIUS, LINE_WIDTH,TURN_SPEED, PLAYER_SPEED, SHOT_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_SHOOT_COOLDOWN_SECONDS
 
 class Player(CircleShape):
-    def __init__(self, x, y):
+    def __init__(self, x, y, lives=3):
         super().__init__(x,y, PLAYER_RADIUS)
         self.rotation = 0
         self.cooldown_shot = 0
