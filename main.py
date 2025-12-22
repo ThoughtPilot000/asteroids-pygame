@@ -21,7 +21,7 @@ def main():
     Player.containers = (updatable, drawable)
     Asteroids.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
-    Shot.containers = (shots, updatable, drawable)
+    Shot.containers = (shots, drawable, updatable)
 
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
