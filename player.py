@@ -5,11 +5,12 @@ from shot import Shot
 from constants import PLAYER_RADIUS, LINE_WIDTH,TURN_SPEED, PLAYER_MAX_SPEED, SHOT_RADIUS, PLAYER_SHOOT_SPEED, PLAYER_SHOOT_COOLDOWN_SECONDS, PLAYER_ACC
 
 class Player(CircleShape):
-    def __init__(self, x, y, lives=3):
+    def __init__(self, x, y):
         super().__init__(x,y, PLAYER_RADIUS)
         self.rotation = 0
         self.cooldown_shot = 0
         self.current_speed = 0
+        self.laser_type = "red"
 
     # in the Player class
     def triangle(self):
@@ -28,6 +29,7 @@ class Player(CircleShape):
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
+        weapon_key_pressed = False
 
         if keys[pygame.K_a]:
             self.rotate(float("-" + str(dt)))
@@ -43,6 +45,16 @@ class Player(CircleShape):
                 self.current_speed += PLAYER_ACC * dt
         if keys[pygame.K_SPACE]:
             self.shoot()
+        if keys[pygame.K_f] and not weapon_key_pressed:
+            weapon_key_pressed = True
+            if self.laser_type == "red":
+                self.laser_type = "yellow"
+            else:
+                self.laser_type = "red"
+        else:
+            weapon_key_pressed = False
+        
+
         if not keys[pygame.K_w] and not keys[pygame.K_s]:
             if self.current_speed > 0:
                 self.current_speed -= PLAYER_ACC * dt 
@@ -57,7 +69,12 @@ class Player(CircleShape):
 
     def shoot(self):
         if self.cooldown_shot < 0:
-            shot = Shot(self.position.x, self.position.y, SHOT_RADIUS)
+            if self.laser_type == "yellow":
+                shot = Shot(self.position.x, self.position.y, SHOT_RADIUS * 3, self.laser_type)
+            elif self.laser_type == "red":
+                shot = Shot(self.position.x, self.position.y, SHOT_RADIUS, self.laser_type)
+            else:
+                raise Exception("Unknown laser type")
             shot.velocity = pygame.Vector2(0, 1)
             shot.velocity = shot.velocity.rotate(self.rotation) 
             shot.velocity *= PLAYER_SHOOT_SPEED

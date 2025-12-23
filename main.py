@@ -72,7 +72,8 @@ def main():
             for x in shots:
                 if x.collide_with(asteroid_object):
                     log_event("asteroid_shot")
-                    x.kill()
+                    if not x.type == "yellow":
+                        x.kill()
                     asteroid_object.split()
 
                     if asteroid_object.golden:
