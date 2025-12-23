@@ -34,7 +34,7 @@ def main():
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, drawable, updatable)
 
-    text_font = pygame.font.SysFont("Arial", 30)
+    text_font = pygame.font.SysFont("Firacode", 30)
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
     deltaclock = pygame.time.Clock()
@@ -99,7 +99,7 @@ def main():
             raise Exception("Unknown laser type")
 
         
-        draw_text("Score: " + str(score), text_font, "white", SCREEN_WIDTH / 2 - 65 , SCREEN_HEIGHT - (SCREEN_HEIGHT - 70), screen)
+        draw_text("Score: " + str(score), text_font, "white", SCREEN_WIDTH / 2 - 65 , SCREEN_HEIGHT - (SCREEN_HEIGHT - 50), screen)
 
         #always last called
         pygame.display.flip()
