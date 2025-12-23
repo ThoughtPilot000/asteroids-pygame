@@ -43,7 +43,7 @@ class Player(CircleShape):
                 self.current_speed += PLAYER_ACC * dt
         if keys[pygame.K_SPACE]:
             self.shoot()
-        if not keys[pygame.K_w] and not [pygame.K_s]:
+        if not keys[pygame.K_w] and not keys[pygame.K_s]:
             if self.current_speed > 0:
                 self.current_speed -= PLAYER_ACC * dt 
 
