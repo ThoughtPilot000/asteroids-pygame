@@ -70,9 +70,9 @@ class Player(CircleShape):
     def shoot(self):
         if self.cooldown_shot < 0:
             if self.laser_type == "yellow":
-                shot = Shot(self.position.x, self.position.y, SHOT_RADIUS * 3, self.laser_type)
+                shot = Shot(self.position.x, self.position.y, SHOT_RADIUS * 3, self.laser_type, self.rotation - 90)
             elif self.laser_type == "red":
-                shot = Shot(self.position.x, self.position.y, SHOT_RADIUS, self.laser_type)
+                shot = Shot(self.position.x, self.position.y, SHOT_RADIUS, self.laser_type, self.rotation)
             else:
                 raise Exception("Unknown laser type")
             shot.velocity = pygame.Vector2(0, 1)

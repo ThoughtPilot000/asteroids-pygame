@@ -17,10 +17,17 @@ def main():
     dt = 0
 
     pygame.init()
+
+    dock_1 = pygame.image.load("assets/small_laser_equ.png")
+    dock_2 = pygame.image.load("assets/big_laser_equ.png")
+    dock_1 = pygame.transform.scale(dock_1, (200, 100))
+    dock_2 = pygame.transform.scale(dock_2, (200, 100))
+
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    docks = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)
     Asteroids.containers = (asteroids, updatable, drawable)
@@ -29,8 +36,6 @@ def main():
 
     text_font = pygame.font.SysFont("Arial", 30)
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-    dock = pygame.image.load("assets/weapons_bar.png")
-    dock = pygame.transform.scale(dock, (200, 100))
 
     deltaclock = pygame.time.Clock()
 
@@ -86,7 +91,14 @@ def main():
         for sprite in drawable:
             sprite.draw(screen)
 
-        screen.blit(dock, (SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 250))
+        if player.laser_type == "red":
+            screen.blit(dock_1, (SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 250))
+        elif player.laser_type == "yellow":
+            screen.blit(dock_2, (SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 250))
+        else:
+            raise Exception("Unknown laser type")
+
+        
         draw_text("Score: " + str(score), text_font, "white", SCREEN_WIDTH / 2 - 65 , SCREEN_HEIGHT - (SCREEN_HEIGHT - 70), screen)
 
         #always last called

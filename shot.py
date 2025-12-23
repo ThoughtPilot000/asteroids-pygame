@@ -4,10 +4,10 @@ from constants import LINE_WIDTH
 
 class Shot(CircleShape):
 
-    def __init__(self, x,y,radius, type):
+    def __init__(self, x,y,radius, type, rotation):
         super().__init__(x,y,radius)
         self.type = type
-        self.rotation = 0
+        self.rotation = rotation
 
     def rectangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
