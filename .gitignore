@@ -6,8 +6,8 @@ dist/
 wheels/
 *.egg-info
 game_state.jsonl
-game_events.jsonl
 possible_modifications.txt
+game_events.jsonl
 
 # Virtual environments
 .venv
