@@ -29,6 +29,8 @@ def main():
 
     text_font = pygame.font.SysFont("Arial", 30)
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+    dock = pygame.image.load("assets/weapons_bar.png")
+    dock = pygame.transform.scale(dock, (200, 100))
 
     deltaclock = pygame.time.Clock()
 
@@ -51,6 +53,8 @@ def main():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                print("Game over!")
+                print(f"Your score was {score}!")
                 return 
 
         updatable.update(dt)
@@ -81,6 +85,7 @@ def main():
         for sprite in drawable:
             sprite.draw(screen)
 
+        screen.blit(dock, (SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 250))
         draw_text("Score: " + str(score), text_font, "white", SCREEN_WIDTH / 2 - 65 , SCREEN_HEIGHT - (SCREEN_HEIGHT - 70), screen)
 
         #always last called
