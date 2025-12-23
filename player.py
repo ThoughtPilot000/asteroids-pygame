@@ -11,6 +11,7 @@ class Player(CircleShape):
         self.cooldown_shot = 0
         self.current_speed = 0
         self.laser_type = "red"
+        self.weapon_key_pressed = False
 
     # in the Player class
     def triangle(self):
@@ -45,14 +46,14 @@ class Player(CircleShape):
                 self.current_speed += PLAYER_ACC * dt
         if keys[pygame.K_SPACE]:
             self.shoot()
-        if keys[pygame.K_f] and not weapon_key_pressed:
-            weapon_key_pressed = True
+        if keys[pygame.K_f] and not self.weapon_key_pressed:
+            self.weapon_key_pressed = True
             if self.laser_type == "red":
                 self.laser_type = "yellow"
             else:
                 self.laser_type = "red"
-        else:
-            weapon_key_pressed = False
+        if not keys[pygame.K_f]:
+            self.weapon_key_pressed = False
         
 
         if not keys[pygame.K_w] and not keys[pygame.K_s]:
