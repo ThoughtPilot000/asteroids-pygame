@@ -9,11 +9,12 @@ from shot import Shot
 from drawtext import draw_text
 
 def main():
-    
-    score = 0
 
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}\nScreen height: {SCREEN_HEIGHT}")
+
+    score = 0
+    dt = 0
 
     pygame.init()
     updatable = pygame.sprite.Group()
@@ -30,12 +31,20 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
     deltaclock = pygame.time.Clock()
-    dt = 0
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroidfield = AsteroidField()
 
-    
+    def initialize():
+        nonlocal score, dt
+        score = 0
+        dt = 0
+        for i in asteroids:
+            i.kill()
+
+        player.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
+    initialize()
 
     while True:
         log_state()
@@ -53,7 +62,7 @@ def main():
 
                 print("Game over!")
                 print(f"Your score was {score}!")
-                sys.exit()
+                initialize()
 
         for asteroid_object in asteroids:
             for x in shots:
