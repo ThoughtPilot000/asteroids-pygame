@@ -34,7 +34,7 @@ def main():
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, drawable, updatable)
 
-    text_font = pygame.font.SysFont("Firacode", 30)
+    text_font = pygame.font.Font("FiraCode-Regular.ttf", 30)
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
     deltaclock = pygame.time.Clock()
